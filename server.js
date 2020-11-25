@@ -1,10 +1,10 @@
 const express = require('express');
-const systemSolar = require('./json/systemSolar.json');
+const {systemSolar} = require('./json/systemSolar.json');
 const app = express();
 
 app.use(express.json());
 
-// VERB HTTP, GET, POST, PUT E DELETE
+// VERBS HTTP, GET, POST, PUT E DELETE
 app.get('/systemSolar', (req, res) => {
     res.json(systemSolar);
 });
@@ -19,41 +19,43 @@ app.get('/systemSolar/:id', (req, res) => {
     res.json(system);
 });
 
-// // HTTP => POST
-// app.post("/systemSolar", (req, res) => {
-//     const { id, starNature, starName, starTemperature, starOrbit, starDistance, starAtsmophere, starComposition } = req.body;
+// HTTP => POST
+app.post("/systemSolar", (req, res) => {
+    const { id, starNature, starName, starTemperature, starOrbit, starDistance, starAtsmophere, starComposition } = req.body;
 
-//     res.json({ id, starNature, starName, starTemperature, starOrbit, starDistance, starAtsmophere, starComposition });
-// });
+    res.json({ id, starNature, starName, starTemperature, starOrbit, starDistance, starAtsmophere, starComposition });
+});
 
-// // HTTP => PUT
-// app.put("/systemSolar/:id", (req, res) => {
-//     const { id } = req.params;
-//     const system = sistemSolar.find(sys => sys.id == id);
+// HTTP => PUT
+app.put("/systemSolar/:id", (req, res) => {
+    const { id } = req.params;
+    const system = sistemSolar.find(sys => sys.id == id);
 
-//     if(!system) return res.status(204).json();
+    if(!system) return res.status(204).json();
 
-//     const { id, starNature, starName, starTemperature, starOrbit, starDistance, starAtsmophere, starComposition } = req.body;
+    const { starNature, starName, starTemperature, starOrbit, starDistance, starAtsmophere, starComposition } = req.body;
 
-//     system.id = id;
-//     system.starNature = starNature;
-//     system.starName = starName;
-//     system.starTemperature = starTemperature;
-//     system.starOrbit = starOrbit;
-//     system.starDistance = starDistance;
-//     system.starAtsmophere = starAtsmophere;
-//     system.starComposition = starComposition;
+    system.starNature = starNature;
+    system.starName = starName;
+    system.starTemperature = starTemperature;
+    system.starOrbit = starOrbit;
+    system.starDistance = starDistance;
+    system.starAtsmophere = starAtsmophere;
+    system.starComposition = starComposition;
 
-//     res.json(system);
-// });
+    res.json(system);
+});
 
-// // HTTP => DELETE
-// app.delete("/systemSolar/:id", (req, res) => {
-//     const { id } = req.params;
-//     const systemFiltered = systemSolar.filter(sys => sys.id != id);
+// HTTP => DELETE
+app.delete("/systemSolar/:id", (req, res) => {
+    const { id } = req.params;
+    const systemFiltered = systemSolar.filter(sys => sys.id != id);
 
-//     res.json(systemFiltered);
-// });
+    res.json(systemFiltered);
+});
 
 // SERVER
-app.listen(4432);
+app.listen(4432, () => {
+    console.log('Servers is running!');
+    console.log('http://localhost:4432/systemSolar');
+});
