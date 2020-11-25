@@ -56,7 +56,4 @@ app.get('/systemSolar/:id', (req, res) => {
 // });
 
 // SERVER
-app.listen(4432, () => {
-    console.log('Server is reunning!');
-    console.log('http://localhost:4432/systemSolar');
-});
+app.listen(4432);
